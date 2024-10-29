@@ -9,6 +9,7 @@ from fireblocks_sdk import FireblocksSDK, TransferPeerPath, DestinationTransferP
 
 
 def main():
+    "Main function to create a Fireblocks transaction"
     print("\n=====*===== Fireblocks Transaction Tool =====*=====\n")
     vault_id = input("Enter Vault account ID: ").strip()
     external_wallet = input("Enter External wallet ID: ").strip()
@@ -40,10 +41,13 @@ def main():
         print("Transaction cancelled.")
         return
 
+    # Determine the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
     try:
-        with open("./quantum_main.key", "r", encoding="utf-8") as secret_file:
+        with open(os.path.join(script_dir, "quantum_main.key"), "r", encoding="utf-8") as secret_file:
             api_secret = secret_file.read().strip()
-        with open("./api_key.txt", "r", encoding="utf-8") as key_file:
+        with open(os.path.join(script_dir, "api_key.txt"), "r", encoding="utf-8") as key_file:
             api_key = key_file.read().strip()
     except FileNotFoundError as e:
         print(f"Error: {e}")
