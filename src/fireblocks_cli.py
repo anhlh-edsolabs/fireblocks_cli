@@ -1,11 +1,15 @@
-#!/usr/bin/env python3# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# # -*- coding: utf-8 -*-
 """
 Created on Tue Oct 29 10:45:00 2024
 
 @author: Le Hoang Anh
 """
+from __future__ import print_function
+from __future__ import unicode_literals
 import os
-from fireblocks_sdk import FireblocksSDK, TransferPeerPath, DestinationTransferPeerPath
+import sys
+from fireblocks_sdk import FireblocksSDK, TransferPeerPath, DestinationTransferPeerPath, VAULT_ACCOUNT, EXTERNAL_WALLET
 
 
 def main():
@@ -17,7 +21,7 @@ def main():
     eth_amount = input("Enter ETH amount (default 0): ").strip()
     max_fee = input("Enter Max gas fee (default 10): ").strip()
     tx_note = input("Enter Transaction note: ").strip()
-
+    
     # Use default value for eth_amount if not provided
     if not eth_amount:
         eth_amount = "0"
@@ -28,12 +32,12 @@ def main():
 
     # Print transaction details for confirmation
     print("\nTransaction Details:")
-    print(f"Vault Account ID: {vault_id}")
-    print(f"External Wallet ID: {external_wallet}")
-    print(f"Contract Call Data: {call_data}")
-    print(f"ETH Amount: {eth_amount}")
-    print(f"Max Gas Fee: {max_fee}")
-    print(f"Transaction Note: {tx_note}")
+    print("Vault Account ID: {}".format(vault_id))
+    print("External Wallet ID: {}".format(external_wallet))
+    print("Contract Call Data: {}".format(call_data))
+    print("ETH Amount: {}".format(eth_amount))
+    print("Max Gas Fee: {}".format(max_fee))
+    print("Transaction Note: {}".format(tx_note))
 
     confirmation = input(
         "\nDo you want to proceed with the transaction? (y/n): ").strip()
@@ -50,10 +54,10 @@ def main():
         with open(os.path.join(script_dir, "api_key.txt"), "r", encoding="utf-8") as key_file:
             api_key = key_file.read().strip()
     except FileNotFoundError as e:
-        print(f"Error: {e}")
+        print("Error: {}".format(e))
         return
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        print("An unexpected error occurred: {}".format(e))
         return
 
     fireblocks = FireblocksSDK(api_secret, api_key)
@@ -62,17 +66,17 @@ def main():
         tx_result = fireblocks.create_transaction(
             asset_id="ETH",
             amount=eth_amount,
-            source=TransferPeerPath("VAULT_ACCOUNT", vault_id),
+            source=TransferPeerPath(VAULT_ACCOUNT, vault_id),
             destination=DestinationTransferPeerPath(
-                "EXTERNAL_WALLET", external_wallet),
+                EXTERNAL_WALLET, external_wallet),
             tx_type="CONTRACT_CALL",
             note=tx_note,
             max_fee=max_fee,
             extra_parameters={"contractCallData": call_data}
         )
-        print("Transaction Result:", tx_result)
+        print("Transaction Result: {}".format(tx_result))
     except Exception as e:
-        print(f"Transaction failed: {e}")
+        print("Transaction failed: {}".format(e))
 
 
 if __name__ == "__main__":
