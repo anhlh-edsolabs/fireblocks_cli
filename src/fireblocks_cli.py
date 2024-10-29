@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Created on Tue Oct 29 10:45:00 2024
 
@@ -21,7 +21,7 @@ def main():
     eth_amount = input("Enter ETH amount (default 0): ").strip()
     max_fee = input("Enter Max gas fee (default 10): ").strip()
     tx_note = input("Enter Transaction note: ").strip()
-    
+
     # Use default value for eth_amount if not provided
     if not eth_amount:
         eth_amount = "0"
