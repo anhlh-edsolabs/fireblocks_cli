@@ -8,6 +8,8 @@ This project is a command-line tool for creating and managing transactions using
 .   ├── .gitignore 
     ├── package.json 
     ├── README.md
+    ├── requirements.txt
+    ├── setup.sh
     ├── src/
         ├── api_key.txt
         ├── fireblocks_cli.py
@@ -29,25 +31,18 @@ This project is a command-line tool for creating and managing transactions using
 
 1. **Clone the repository:**
 
-    ```sh
+    ```bash
     git clone git@github.com:anhlh-edsolabs/fireblocks_cli.git
     cd fireblocks_cli
     ```
 
-2. **Create and activate a virtual environment:**
+2. **Setup the environment:**
 
-    ```sh
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```bash
+    ./setup.sh
     ```
 
-3. **Install dependencies:**
-
-    ```sh
-    pip install -r requirements.txt
-    ```
-
-4. **Add your Fireblocks API key and secret:**
+3. **Add your Fireblocks API key and secret:**
 
     - Place your API key in `src/api_key.txt`.
     - Place your API secret in `src/quantum_main.key`.
@@ -56,14 +51,14 @@ This project is a command-line tool for creating and managing transactions using
 
 Run the CLI tool:
 
-```sh
-python fireblocks_cli.py
+```bash
+python src/fireblocks_cli.py
 ```
 
 or
 
-```sh
-python3 fireblocks_cli.py
+```bash
+python3 src/fireblocks_cli.py
 ```
 
 Follow the prompts to enter transaction details such as Vault account ID, External wallet ID, Contract call data, ETH amount, Max gas fee, and Transaction note.
